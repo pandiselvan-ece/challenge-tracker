@@ -3,142 +3,128 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>7-Day Challenge Tracker Pro</title>
+  <title>7-Day Challenge — Tracker</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="header-inner">
-      <h1>7-Day Challenge Tracker</h1>
-      <div class="header-actions">
-        <button id="adminBtn" class="btn small">Admin Login</button>
-      </div>
+    <div class="brand">
+      <h1>7-Day Challenge</h1>
+      <p class="subtitle">Honesty • Consistency • Growth</p>
     </div>
-    <p id="topHeadline" class="headline">Honesty matters — be truthful in your daily report.</p>
+    <nav>
+      <a class="admin-link" href="admin.html">Admin</a>
+    </nav>
   </header>
 
   <main class="container">
-    <section class="card form-card">
-      <h2>Daily Entry</h2>
-      <form id="dailyForm" autocomplete="off">
-        <div class="row">
-          <label class="input-group"><span>Name</span><input id="name" required /></label>
-          <label class="input-group"><span>Date</span><input id="date" type="date" required /></label>
-        </div>
+    <section class="card form-card" aria-labelledby="form-heading">
+      <h2 id="form-heading">Daily Entry</h2>
 
-        <div class="row">
-          <label class="input-group"><span>Wake-up</span><input id="wake" type="time" required /></label>
-          <label class="input-group"><span>Sleep</span><input id="sleep" type="time" required /></label>
-        </div>
-
-        <div class="row">
-          <label class="input-group"><span>Screen Time (hrs)</span><input id="screen" type="number" min="0" step="0.1" required /></label>
-          <label class="input-group"><span># Sugary Items</span><input id="sugar" type="number" min="0" value="0" /></label>
-        </div>
-
-        <div class="row">
-          <label class="input-group"><span># Oily Items</span><input id="oily" type="number" min="0" value="0" /></label>
-          <label class="input-group"><span>Violations</span>
-            <div class="checkboxes">
-              <label><input type="checkbox" class="violation" value="Tea/Coffee" /> Tea/Coffee</label>
-              <label><input type="checkbox" class="violation" value="Sugar" /> Sugar</label>
-              <label><input type="checkbox" class="violation" value="Oily Food" /> Oily Food</label>
-              <label><input type="checkbox" class="violation" value="Reels/Shorts" /> Reels/Shorts</label>
-            </div>
-          </label>
-        </div>
-
-        <label class="input-group full"><span>Items you consumed (brief list)</span>
-          <input id="itemsList" placeholder="e.g., biscuits, one dosa, 2 samosas" />
+      <form id="entryForm" class="grid-form" autocomplete="off">
+        <label class="field">
+          <span class="label">Name</span>
+          <input id="name" required />
         </label>
 
-        <div class="row align-bottom">
-          <label class="input-group"><span>Honesty (1-5)</span>
-            <select id="honesty">
-              <option value="5">5 - Completely honest</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1 - Not honest</option>
-            </select>
-          </label>
-          <label class="input-group full"><span>Honesty note (optional)</span><input id="honestyNote" placeholder="Short note about honesty" /></label>
-        </div>
+        <label class="field">
+          <span class="label">Date</span>
+          <input id="date" type="date" required />
+        </label>
 
-        <div class="actions-row">
-          <button class="btn primary" type="submit">Save Entry (100 pts max)</button>
+        <label class="field">
+          <span class="label">Wake-up</span>
+          <input id="wake" type="time" required />
+        </label>
+
+        <label class="field">
+          <span class="label">Sleep</span>
+          <input id="sleep" type="time" required />
+        </label>
+
+        <label class="field">
+          <span class="label">Screen time (hours)</span>
+          <input id="screen" type="number" min="0" step="0.1" value="0" required />
+        </label>
+
+        <label class="field">
+          <span class="label">Sugary items (count)</span>
+          <input id="sugar" type="number" min="0" value="0" />
+        </label>
+
+        <label class="field">
+          <span class="label">Oily items (count)</span>
+          <input id="oily" type="number" min="0" value="0" />
+        </label>
+
+        <fieldset class="field violations" aria-label="violations">
+          <legend class="label">Violations</legend>
+          <label><input type="checkbox" class="violation" value="Tea/Coffee"> Tea / Coffee</label>
+          <label><input type="checkbox" class="violation" value="Sugar"> Sugar</label>
+          <label><input type="checkbox" class="violation" value="Oily Food"> Oily</label>
+          <label><input type="checkbox" class="violation" value="Reels"> Reels/Shorts</label>
+        </fieldset>
+
+        <label class="field full">
+          <span class="label">Items consumed (brief)</span>
+          <input id="itemsList" placeholder="e.g., 1 dosa, 2 samosas" />
+        </label>
+
+        <label class="field">
+          <span class="label">Honesty (1-5)</span>
+          <select id="honesty">
+            <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
+          </select>
+        </label>
+
+        <label class="field full">
+          <span class="label">Honesty note (optional)</span>
+          <input id="honestyNote" placeholder="Short note about your honesty" />
+        </label>
+
+        <div class="actions full">
+          <button id="saveBtn" class="btn primary" type="submit">Save Entry — Earn Points</button>
+          <div id="saveFeedback" class="muted small"></div>
         </div>
       </form>
     </section>
 
-    <section class="card summary-card">
-      <h2>Weekly Summary</h2>
-      <div class="summary-top">
+    <section class="card summary-card" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Summary & Leaderboard</h2>
+
+      <div class="top-stats">
         <div class="stat">
-          <div class="stat-num" id="avgScore">--</div>
+          <div class="stat-big" id="statAvg">—</div>
           <div class="stat-label">Avg Score</div>
         </div>
         <div class="stat">
-          <div class="stat-num" id="participants">--</div>
+          <div class="stat-big" id="statParticipants">—</div>
           <div class="stat-label">Participants</div>
         </div>
         <div class="stat">
-          <div class="stat-num" id="totalEntries">--</div>
+          <div class="stat-big" id="statEntries">—</div>
           <div class="stat-label">Total Entries</div>
         </div>
       </div>
 
-      <div class="table-wrap">
-        <table id="summaryTable" class="summary-table">
+      <div class="summary-table-wrap">
+        <table class="summary-table" id="summaryTable" aria-live="polite">
           <thead>
-            <tr>
-              <th>Name</th><th>Date</th><th>Screen</th><th>Violations</th><th>Score</th><th>Points (cum)</th>
-            </tr>
+            <tr><th>Name</th><th>Date</th><th>Screen</th><th>Violations</th><th>Score</th><th>Points</th></tr>
           </thead>
           <tbody></tbody>
         </table>
       </div>
 
       <div class="charts-row">
-        <canvas id="scoreChart" height="140"></canvas>
-        <canvas id="leaderChart" height="140"></canvas>
+        <canvas id="trendCanvas" height="140"></canvas>
+        <canvas id="leaderCanvas" height="140"></canvas>
       </div>
     </section>
   </main>
 
-  <!-- Admin Modal -->
-  <div id="adminModal" class="modal hidden">
-    <div class="modal-card">
-      <h3>Admin Login</h3>
-      <input id="adminPassword" type="password" placeholder="Enter admin password" />
-      <div class="modal-actions">
-        <button id="adminLogin" class="btn primary">Login</button>
-        <button id="adminClose" class="btn">Close</button>
-      </div>
-      <p class="muted">(Admin view only: you will be able to view leaderboard & full entries.)</p>
-    </div>
-  </div>
-
-  <!-- Admin Panel (only visible after login) -->
-  <div id="adminPanel" class="admin-panel hidden">
-    <div class="admin-inner card">
-      <div class="admin-top">
-        <h3>Admin Dashboard</h3>
-        <button id="adminLogout" class="btn">Logout</button>
-      </div>
-      <p class="muted">Leaderboard — cumulative points across all entries</p>
-      <div id="leaderboardWrap"></div>
-      <div class="table-wrap">
-        <table id="fullTable" class="summary-table">
-          <thead><tr><th>Name</th><th>Date</th><th>Wake</th><th>Sleep</th><th>Screen</th><th>Items</th><th>Violations</th><th>Honesty</th><th>Score</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
   <footer class="site-footer">
-    <p>Made for offline challenge tracking • Manage data privately as Admin</p>
+    <p class="quote" id="dailyQuote">“Be honest. Small truths every day.”</p>
   </footer>
 
   <script src="js/utils.js"></script>

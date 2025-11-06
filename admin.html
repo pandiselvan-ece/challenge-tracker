@@ -1,1 +1,65 @@
-﻿<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Admin Dashboard</title></head><body><h1>Admin Page</h1><p>This is the admin dashboard placeholder.</p></body></html>
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — 7-Day Challenge</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <h1>Admin Dashboard</h1>
+      <p class="subtitle">Manage entries • Leaderboard • Awards</p>
+    </div>
+    <nav>
+      <a class="admin-link" href="index.html">Back</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="loginCard" class="card admin-card">
+      <h2>Admin Login</h2>
+      <p class="muted">Enter admin password to access dashboard.</p>
+      <input id="adminPwd" type="password" placeholder="Admin password" />
+      <div class="actions">
+        <button id="loginBtn" class="btn primary">Login</button>
+      </div>
+      <p class="small muted">Password stored client-side — change it in js/admin.js</p>
+    </section>
+
+    <section id="dashboard" class="card hidden admin-dashboard">
+      <div class="admin-top">
+        <h2>Leaderboard & Controls</h2>
+        <div>
+          <button id="logoutBtn" class="btn">Logout</button>
+          <button id="clearBtn" class="btn danger">Clear All Data</button>
+        </div>
+      </div>
+
+      <div class="admin-controls">
+        <input id="searchInput" placeholder="Search name or date (YYYY-MM-DD)" />
+        <button id="sortPointsBtn" class="btn">Sort by Points ↓</button>
+      </div>
+
+      <div id="awardsWrap" class="awards-wrap"></div>
+
+      <div class="table-wrap">
+        <table id="adminTable" class="summary-table">
+          <thead><tr><th>Name</th><th>Date</th><th>Wake</th><th>Sleep</th><th>Screen</th><th>Violations</th><th>Honesty</th><th>Score</th><th>Points</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="charts-row">
+        <canvas id="adminTrend" height="140"></canvas>
+        <canvas id="adminLeader" height="140"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
