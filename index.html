@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7-Day Challenge Tracker Pro</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>🏆 7-Day Challenge Tracker</h1>
+    <p id="reminder" class="reminder hidden">⚠️ Don’t forget to fill today’s report!</p>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <h2>📝 Daily Entry</h2>
+      <form id="dailyForm">
+        <label>Name:<input type="text" id="name" required /></label>
+        <label>Date:<input type="date" id="date" required /></label>
+
+        <label>Wake-up Time:<input type="time" id="wake" required /></label>
+        <label>Sleep Time:<input type="time" id="sleep" required /></label>
+
+        <label>Screen Time (hrs):<input type="number" id="screen" min="0" step="0.1" required /></label>
+
+        <label>Sugary Items Consumed:<input type="number" id="sugar" min="0" /></label>
+        <label>Oily Items Consumed:<input type="number" id="oily" min="0" /></label>
+
+        <fieldset>
+          <legend>Violations</legend>
+          <label><input type="checkbox" class="violation" value="Tea/Coffee" /> Tea/Coffee</label>
+          <label><input type="checkbox" class="violation" value="Sugar" /> Sugar</label>
+          <label><input type="checkbox" class="violation" value="Oily Food" /> Oily Food</label>
+          <label><input type="checkbox" class="violation" value="Reels/Shorts" /> Reels/Shorts</label>
+        </fieldset>
+
+        <button type="submit">💾 Save Entry</button>
+      </form>
+    </section>
+
+    <section class="summary-section">
+      <h2>📊 Weekly Summary</h2>
+      <table id="summaryTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Screen Time</th>
+            <th>Violations</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <canvas id="scoreChart" width="400" height="150"></canvas>
+    </section>
+
+    <section class="actions">
+      <button id="exportBtn">⬇️ Export JSON</button>
+      <input type="file" id="importFile" hidden />
+      <button id="importBtn">📂 Import JSON</button>
+      <button id="resetBtn" class="danger">🗑 Reset Challenge</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Offline-Ready Challenge Tracker v1.0 | Made with ❤️</p>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
