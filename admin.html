@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -7,59 +7,54 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <h1>Admin Dashboard</h1>
-      <p class="subtitle">Manage entries • Leaderboard • Awards</p>
-    </div>
-    <nav>
-      <a class="admin-link" href="index.html">Back</a>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section id="loginCard" class="card admin-card">
-      <h2>Admin Login</h2>
-      <p class="muted">Enter admin password to access dashboard.</p>
-      <input id="adminPwd" type="password" placeholder="Admin password" />
-      <div class="actions">
-        <button id="loginBtn" class="btn primary">Login</button>
+  <main class="page">
+    <header class="header">
+      <div class="brand">
+        <h1>Admin</h1>
+        <p class="subtitle">Manage submissions</p>
       </div>
-      <p class="small muted">Password stored client-side — change it in js/admin.js</p>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Back</a>
+      </nav>
+    </header>
+
+    <section id="loginCard" class="card admin-card">
+      <h2 class="section-title">Admin Login</h2>
+      <p class="muted small">Enter admin password to view and manage entries.</p>
+      <input id="adminPassword" type="password" placeholder="Admin password" />
+      <div class="field-actions">
+        <button id="adminLoginBtn" class="btn primary">Login</button>
+      </div>
     </section>
 
-    <section id="dashboard" class="card hidden admin-dashboard">
+    <section id="dashboard" class="card admin-dashboard hidden" aria-live="polite">
       <div class="admin-top">
-        <h2>Leaderboard & Controls</h2>
-        <div>
+        <h2 class="section-title">All Submissions</h2>
+        <div class="admin-controls">
+          <input id="searchInput" placeholder="Search name or date (YYYY-MM-DD)" />
           <button id="logoutBtn" class="btn">Logout</button>
-          <button id="clearBtn" class="btn danger">Clear All Data</button>
+          <button id="clearDataBtn" class="btn danger">Clear All</button>
         </div>
       </div>
 
-      <div class="admin-controls">
-        <input id="searchInput" placeholder="Search name or date (YYYY-MM-DD)" />
-        <button id="sortPointsBtn" class="btn">Sort by Points ↓</button>
-      </div>
-
-      <div id="awardsWrap" class="awards-wrap"></div>
-
       <div class="table-wrap">
         <table id="adminTable" class="summary-table">
-          <thead><tr><th>Name</th><th>Date</th><th>Wake</th><th>Sleep</th><th>Screen</th><th>Violations</th><th>Honesty</th><th>Score</th><th>Points</th><th>Actions</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Name</th><th>Date</th><th>Screen</th><th>Violations</th><th>Honesty</th><th>Items</th><th>Actions</th>
+            </tr>
+          </thead>
           <tbody></tbody>
         </table>
       </div>
-
-      <div class="charts-row">
-        <canvas id="adminTrend" height="140"></canvas>
-        <canvas id="adminLeader" height="140"></canvas>
-      </div>
     </section>
+
+    <footer class="footer">
+      <p class="muted">Admin access — local only. Change password in <code>js/admin.js</code></p>
+    </footer>
   </main>
 
   <script src="js/utils.js"></script>
-  <script src="js/charts.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>
