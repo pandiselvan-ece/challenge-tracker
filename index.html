@@ -3,28 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>7-Day Challenge — Tracker</title>
+  <title>7-Day Challenge — Submit</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <h1>7-Day Challenge</h1>
-      <p class="subtitle">Honesty • Consistency • Growth</p>
-    </div>
-    <nav>
-      <a class="admin-link" href="admin.html">Admin</a>
-    </nav>
-  </header>
+  <main class="page">
+    <header class="header">
+      <div class="brand">
+        <h1>7-Day Challenge</h1>
+        <p class="subtitle">Honesty · Consistency · Progress</p>
+      </div>
+      <nav class="nav">
+        <a href="admin.html" class="nav-link" aria-label="Admin login">Admin</a>
+      </nav>
+    </header>
 
-  <main class="container">
-    <section class="card form-card" aria-labelledby="form-heading">
-      <h2 id="form-heading">Daily Entry</h2>
+    <section class="card hero-card" aria-labelledby="daily-title">
+      <h2 id="daily-title" class="section-title">Daily Submission</h2>
+      <p class="lead">Fill this at the end of your day. Submit once — you'll get a confirmation.</p>
 
-      <form id="entryForm" class="grid-form" autocomplete="off">
+      <form id="entryForm" class="form-grid" autocomplete="off" novalidate>
         <label class="field">
           <span class="label">Name</span>
-          <input id="name" required />
+          <input id="name" type="text" placeholder="Your name" required />
         </label>
 
         <label class="field">
@@ -34,17 +35,17 @@
 
         <label class="field">
           <span class="label">Wake-up</span>
-          <input id="wake" type="time" required />
+          <input id="wake" type="time" />
         </label>
 
         <label class="field">
           <span class="label">Sleep</span>
-          <input id="sleep" type="time" required />
+          <input id="sleep" type="time" />
         </label>
 
         <label class="field">
-          <span class="label">Screen time (hours)</span>
-          <input id="screen" type="number" min="0" step="0.1" value="0" required />
+          <span class="label">Screen time (hrs)</span>
+          <input id="screen" type="number" min="0" step="0.1" value="0" />
         </label>
 
         <label class="field">
@@ -57,78 +58,54 @@
           <input id="oily" type="number" min="0" value="0" />
         </label>
 
-        <fieldset class="field violations" aria-label="violations">
-          <legend class="label">Violations</legend>
+        <fieldset class="field full violations" aria-label="Violations">
+          <legend class="label">Violations (tick if done)</legend>
           <label><input type="checkbox" class="violation" value="Tea/Coffee"> Tea / Coffee</label>
           <label><input type="checkbox" class="violation" value="Sugar"> Sugar</label>
-          <label><input type="checkbox" class="violation" value="Oily Food"> Oily</label>
-          <label><input type="checkbox" class="violation" value="Reels"> Reels/Shorts</label>
+          <label><input type="checkbox" class="violation" value="Oily Food"> Oily Food</label>
+          <label><input type="checkbox" class="violation" value="Reels/Shorts"> Reels / Shorts</label>
         </fieldset>
 
         <label class="field full">
           <span class="label">Items consumed (brief)</span>
-          <input id="itemsList" placeholder="e.g., 1 dosa, 2 samosas" />
+          <input id="itemsList" type="text" placeholder="e.g., biscuit, 1 dosa" />
         </label>
 
         <label class="field">
-          <span class="label">Honesty (1-5)</span>
+          <span class="label">Honesty (1 = low, 5 = full)</span>
           <select id="honesty">
-            <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
           </select>
         </label>
 
         <label class="field full">
           <span class="label">Honesty note (optional)</span>
-          <input id="honestyNote" placeholder="Short note about your honesty" />
+          <input id="honestyNote" type="text" placeholder="Short note (optional)" />
         </label>
 
-        <div class="actions full">
-          <button id="saveBtn" class="btn primary" type="submit">Save Entry — Earn Points</button>
-          <div id="saveFeedback" class="muted small"></div>
+        <div class="field-actions full">
+          <button id="submitBtn" class="btn primary" type="submit">Submit</button>
         </div>
+
+        <div id="resultMsg" class="resultMsg hidden" role="status" aria-live="polite"></div>
       </form>
     </section>
 
-    <section class="card summary-card" aria-labelledby="summary-heading">
-      <h2 id="summary-heading">Summary & Leaderboard</h2>
-
-      <div class="top-stats">
-        <div class="stat">
-          <div class="stat-big" id="statAvg">—</div>
-          <div class="stat-label">Avg Score</div>
-        </div>
-        <div class="stat">
-          <div class="stat-big" id="statParticipants">—</div>
-          <div class="stat-label">Participants</div>
-        </div>
-        <div class="stat">
-          <div class="stat-big" id="statEntries">—</div>
-          <div class="stat-label">Total Entries</div>
-        </div>
-      </div>
-
-      <div class="summary-table-wrap">
-        <table class="summary-table" id="summaryTable" aria-live="polite">
-          <thead>
-            <tr><th>Name</th><th>Date</th><th>Screen</th><th>Violations</th><th>Score</th><th>Points</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <div class="charts-row">
-        <canvas id="trendCanvas" height="140"></canvas>
-        <canvas id="leaderCanvas" height="140"></canvas>
-      </div>
+    <section class="card info-card">
+      <h3 class="small-title">Why this form?</h3>
+      <p class="muted">Submit honestly at the end of the day. Your submission is saved locally in your browser — only the Admin (you) can view/manage entries on the admin page.</p>
     </section>
+
+    <footer class="footer">
+      <p class="muted">© 2025 • Build your habit one day at a time</p>
+    </footer>
   </main>
 
-  <footer class="site-footer">
-    <p class="quote" id="dailyQuote">“Be honest. Small truths every day.”</p>
-  </footer>
-
   <script src="js/utils.js"></script>
-  <script src="js/charts.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
