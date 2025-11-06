@@ -11,7 +11,7 @@
     <header class="header">
       <div class="brand">
         <h1>7-Day Challenge</h1>
-        <p class="subtitle">Honesty · Consistency · Progress</p>
+        <p class="subtitle">Consistency • Honesty • Progress</p>
       </div>
       <nav class="nav">
         <a href="admin.html" class="nav-link" aria-label="Admin login">Admin</a>
@@ -20,12 +20,12 @@
 
     <section class="card hero-card" aria-labelledby="daily-title">
       <h2 id="daily-title" class="section-title">Daily Submission</h2>
-      <p class="lead">Fill this at the end of your day. Submit once — you'll get a confirmation.</p>
+      <p class="lead">Enter your day’s details. Submit once — the page will reset afterwards.</p>
 
       <form id="entryForm" class="form-grid" autocomplete="off" novalidate>
         <label class="field">
           <span class="label">Name</span>
-          <input id="name" type="text" placeholder="Your name" required />
+          <input id="name" type="text" placeholder="Your full name" required />
         </label>
 
         <label class="field">
@@ -44,47 +44,13 @@
         </label>
 
         <label class="field">
-          <span class="label">Screen time (hrs)</span>
+          <span class="label">Screen time (hours)</span>
           <input id="screen" type="number" min="0" step="0.1" value="0" />
         </label>
 
-        <label class="field">
-          <span class="label">Sugary items (count)</span>
-          <input id="sugar" type="number" min="0" value="0" />
-        </label>
-
-        <label class="field">
-          <span class="label">Oily items (count)</span>
-          <input id="oily" type="number" min="0" value="0" />
-        </label>
-
-        <fieldset class="field full violations" aria-label="Violations">
-          <legend class="label">Violations (tick if done)</legend>
-          <label><input type="checkbox" class="violation" value="Tea/Coffee"> Tea / Coffee</label>
-          <label><input type="checkbox" class="violation" value="Sugar"> Sugar</label>
-          <label><input type="checkbox" class="violation" value="Oily Food"> Oily Food</label>
-          <label><input type="checkbox" class="violation" value="Reels/Shorts"> Reels / Shorts</label>
-        </fieldset>
-
         <label class="field full">
-          <span class="label">Items consumed (brief)</span>
-          <input id="itemsList" type="text" placeholder="e.g., biscuit, 1 dosa" />
-        </label>
-
-        <label class="field">
-          <span class="label">Honesty (1 = low, 5 = full)</span>
-          <select id="honesty">
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-          </select>
-        </label>
-
-        <label class="field full">
-          <span class="label">Honesty note (optional)</span>
-          <input id="honestyNote" type="text" placeholder="Short note (optional)" />
+          <span class="label">What did you consume today?</span>
+          <input id="consumed" type="text" placeholder="e.g., samosa, puff, biscuits" />
         </label>
 
         <div class="field-actions full">
@@ -96,12 +62,12 @@
     </section>
 
     <section class="card info-card">
-      <h3 class="small-title">Why this form?</h3>
-      <p class="muted">Submit honestly at the end of the day. Your submission is saved locally in your browser — only the Admin (you) can view/manage entries on the admin page.</p>
+      <h3 class="small-title">Quick notes</h3>
+      <p class="muted">Your submission is saved locally in the browser. Only the admin (you) can view scores on the admin page.</p>
     </section>
 
     <footer class="footer">
-      <p class="muted">© 2025 • Build your habit one day at a time</p>
+      <p class="muted">© 2025 • Build the habit — one day at a time</p>
     </footer>
   </main>
 
