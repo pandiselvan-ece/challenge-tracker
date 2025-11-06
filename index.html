@@ -1,72 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>7-Day Challenge Tracker Pro</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>🏆 7-Day Challenge Tracker</h1>
-    <p id="reminder" class="reminder hidden">⚠️ Don’t forget to fill today’s report!</p>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>7-Day Challenge Tracker</h1>
+      <div class="header-actions">
+        <button id="adminBtn" class="btn small">Admin Login</button>
+      </div>
+    </div>
+    <p id="topHeadline" class="headline">Honesty matters — be truthful in your daily report.</p>
   </header>
 
-  <main>
-    <section class="form-section">
-      <h2>📝 Daily Entry</h2>
-      <form id="dailyForm">
-        <label>Name:<input type="text" id="name" required /></label>
-        <label>Date:<input type="date" id="date" required /></label>
+  <main class="container">
+    <section class="card form-card">
+      <h2>Daily Entry</h2>
+      <form id="dailyForm" autocomplete="off">
+        <div class="row">
+          <label class="input-group"><span>Name</span><input id="name" required /></label>
+          <label class="input-group"><span>Date</span><input id="date" type="date" required /></label>
+        </div>
 
-        <label>Wake-up Time:<input type="time" id="wake" required /></label>
-        <label>Sleep Time:<input type="time" id="sleep" required /></label>
+        <div class="row">
+          <label class="input-group"><span>Wake-up</span><input id="wake" type="time" required /></label>
+          <label class="input-group"><span>Sleep</span><input id="sleep" type="time" required /></label>
+        </div>
 
-        <label>Screen Time (hrs):<input type="number" id="screen" min="0" step="0.1" required /></label>
+        <div class="row">
+          <label class="input-group"><span>Screen Time (hrs)</span><input id="screen" type="number" min="0" step="0.1" required /></label>
+          <label class="input-group"><span># Sugary Items</span><input id="sugar" type="number" min="0" value="0" /></label>
+        </div>
 
-        <label>Sugary Items Consumed:<input type="number" id="sugar" min="0" /></label>
-        <label>Oily Items Consumed:<input type="number" id="oily" min="0" /></label>
+        <div class="row">
+          <label class="input-group"><span># Oily Items</span><input id="oily" type="number" min="0" value="0" /></label>
+          <label class="input-group"><span>Violations</span>
+            <div class="checkboxes">
+              <label><input type="checkbox" class="violation" value="Tea/Coffee" /> Tea/Coffee</label>
+              <label><input type="checkbox" class="violation" value="Sugar" /> Sugar</label>
+              <label><input type="checkbox" class="violation" value="Oily Food" /> Oily Food</label>
+              <label><input type="checkbox" class="violation" value="Reels/Shorts" /> Reels/Shorts</label>
+            </div>
+          </label>
+        </div>
 
-        <fieldset>
-          <legend>Violations</legend>
-          <label><input type="checkbox" class="violation" value="Tea/Coffee" /> Tea/Coffee</label>
-          <label><input type="checkbox" class="violation" value="Sugar" /> Sugar</label>
-          <label><input type="checkbox" class="violation" value="Oily Food" /> Oily Food</label>
-          <label><input type="checkbox" class="violation" value="Reels/Shorts" /> Reels/Shorts</label>
-        </fieldset>
+        <label class="input-group full"><span>Items you consumed (brief list)</span>
+          <input id="itemsList" placeholder="e.g., biscuits, one dosa, 2 samosas" />
+        </label>
 
-        <button type="submit">💾 Save Entry</button>
+        <div class="row align-bottom">
+          <label class="input-group"><span>Honesty (1-5)</span>
+            <select id="honesty">
+              <option value="5">5 - Completely honest</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1 - Not honest</option>
+            </select>
+          </label>
+          <label class="input-group full"><span>Honesty note (optional)</span><input id="honestyNote" placeholder="Short note about honesty" /></label>
+        </div>
+
+        <div class="actions-row">
+          <button class="btn primary" type="submit">Save Entry (100 pts max)</button>
+        </div>
       </form>
     </section>
 
-    <section class="summary-section">
-      <h2>📊 Weekly Summary</h2>
-      <table id="summaryTable">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Screen Time</th>
-            <th>Violations</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <section class="card summary-card">
+      <h2>Weekly Summary</h2>
+      <div class="summary-top">
+        <div class="stat">
+          <div class="stat-num" id="avgScore">--</div>
+          <div class="stat-label">Avg Score</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="participants">--</div>
+          <div class="stat-label">Participants</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="totalEntries">--</div>
+          <div class="stat-label">Total Entries</div>
+        </div>
+      </div>
 
-      <canvas id="scoreChart" width="400" height="150"></canvas>
-    </section>
+      <div class="table-wrap">
+        <table id="summaryTable" class="summary-table">
+          <thead>
+            <tr>
+              <th>Name</th><th>Date</th><th>Screen</th><th>Violations</th><th>Score</th><th>Points (cum)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
-    <section class="actions">
-      <button id="exportBtn">⬇️ Export JSON</button>
-      <input type="file" id="importFile" hidden />
-      <button id="importBtn">📂 Import JSON</button>
-      <button id="resetBtn" class="danger">🗑 Reset Challenge</button>
+      <div class="charts-row">
+        <canvas id="scoreChart" height="140"></canvas>
+        <canvas id="leaderChart" height="140"></canvas>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>Offline-Ready Challenge Tracker v1.0 | Made with ❤️</p>
+  <!-- Admin Modal -->
+  <div id="adminModal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Admin Login</h3>
+      <input id="adminPassword" type="password" placeholder="Enter admin password" />
+      <div class="modal-actions">
+        <button id="adminLogin" class="btn primary">Login</button>
+        <button id="adminClose" class="btn">Close</button>
+      </div>
+      <p class="muted">(Admin view only: you will be able to view leaderboard & full entries.)</p>
+    </div>
+  </div>
+
+  <!-- Admin Panel (only visible after login) -->
+  <div id="adminPanel" class="admin-panel hidden">
+    <div class="admin-inner card">
+      <div class="admin-top">
+        <h3>Admin Dashboard</h3>
+        <button id="adminLogout" class="btn">Logout</button>
+      </div>
+      <p class="muted">Leaderboard — cumulative points across all entries</p>
+      <div id="leaderboardWrap"></div>
+      <div class="table-wrap">
+        <table id="fullTable" class="summary-table">
+          <thead><tr><th>Name</th><th>Date</th><th>Wake</th><th>Sleep</th><th>Screen</th><th>Items</th><th>Violations</th><th>Honesty</th><th>Score</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>Made for offline challenge tracking • Manage data privately as Admin</p>
   </footer>
 
   <script src="js/utils.js"></script>
