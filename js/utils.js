@@ -1,5 +1,5 @@
-/* utils.js — storage, normalization, small helpers */
-const STORAGE_KEY = "challenge_v3_data";
+/* utils.js — storage & helpers */
+const STORAGE_KEY = "challenge_v4_data";
 
 function loadAll(){
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
@@ -25,4 +25,17 @@ function calcSleepHours(wake, sleep){
   let diff = end - start;
   if(diff < 0) diff += 24;
   return Math.round(diff*100)/100;
+}
+
+// scoring: base 100; each hour (or part) above 8 => -10 points
+function calcScoreForEntry(entry){
+  let pts = 100;
+  const screen = Number(entry.screen) || 0;
+  if(screen > 8){
+    const extraHours = Math.ceil(screen - 8);
+    pts -= extraHours * 10;
+  }
+  // clamp
+  pts = Math.max(0, Math.min(100, Math.round(pts)));
+  return pts;
 }
